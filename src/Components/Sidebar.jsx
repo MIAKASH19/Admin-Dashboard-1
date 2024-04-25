@@ -35,7 +35,7 @@ const Sidebar = () => {
                   className={({isActive})=>(isActive ? activeLink : normalLink)}
                   >
                     {link.icon}
-                    <span className="capitalize">{link.name}</span>
+                    <span className="capitalize">{link.name}super Nova</span>
                   </NavLink>
                 ))}
               </div>
