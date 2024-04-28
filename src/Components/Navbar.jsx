@@ -20,15 +20,42 @@ const NavbarButton = ({ title, icon, color, dotColor, customFunc }) => (
       <span
         style={{ background: dotColor }}
         className="inline-flex h-2 w-2 right-2 absolute top-2 rounded-full"
-      >
+      />
         {icon}
-      </span>
     </button>
   </TooltipComponent>
 );
 
 const Navbar = () => {
-  const { activeMenu, setActiveMenu, isClicked, setIsClicked, handleClick } = useStateContext();
+  const {
+    activeMenu,
+    setActiveMenu,
+    isClicked,
+    setIsClicked,
+    handleClick,
+    screenSize,
+    setScreenSize,
+  } = useStateContext();
+
+  useEffect(() => {
+    const handleResize = () => setScreenSize(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (screenSize <= 900) {
+      setActiveMenu(false)
+    } else {
+      setActiveMenu(true)
+    }
+  }, [screenSize]);
+
   return (
     <div className="flex justify-between items-center p-2 md:mx-6 relative">
       <NavbarButton
@@ -65,10 +92,12 @@ const Navbar = () => {
           >
             <img src={avatar} className="rounded-full w-8 h-8" />
             <p>
-              <span className="text-gray-400">Hi,</span> {" "}
-              <span className="font-normal text-14 text-gray-400 ml-1">Akash</span>
+              <span className="text-gray-400">Hi,</span>{" "}
+              <span className="font-normal text-14 text-gray-400 ml-1">
+                Akash
+              </span>
             </p>
-            <MdKeyboardArrowDown className="text-gray-400 text-14"/>
+            <MdKeyboardArrowDown className="text-gray-400 text-14" />
           </div>
         </TooltipComponent>
         {isClicked.cart && <Cart />}

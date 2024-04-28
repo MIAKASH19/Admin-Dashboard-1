@@ -40,7 +40,7 @@ module.exports = {
       },
       backgroundImage: {
         'hero-pattern':
-          "url('https://i.ibb.co/MkvLDfb/Rectangle-4389.png')",
+          "url('https://www.wamatechnology.com/wp-content/uploads/2019/09/Choosing-WordPress-for-E-commerce-Website-Development-%E2%80%93-in-USA-banner-image.png')",
       },
     },
   },
