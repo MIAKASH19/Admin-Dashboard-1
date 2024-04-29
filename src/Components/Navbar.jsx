@@ -12,7 +12,7 @@ import { useStateContext } from "../Contexts/ContextProvider";
 const NavbarButton = ({ title, icon, color, dotColor, customFunc }) => (
   <TooltipComponent content={title} position="BottomCenter">
     <button
-      className="hover:bg-light-gray flex p-3 items-center gap-1 text-xl rounded-full relative "
+      className="hover:bg-light-gray dark:hover:bg-gray-700 flex p-3 items-center gap-1 text-xl rounded-full relative "
       onClick={customFunc}
       style={{ color }}
       type="button"
@@ -35,6 +35,7 @@ const Navbar = () => {
     handleClick,
     screenSize,
     setScreenSize,
+    currentColor,
   } = useStateContext();
 
   useEffect(() => {
@@ -61,33 +62,33 @@ const Navbar = () => {
       <NavbarButton
         title="Menu"
         customFunc={() => setActiveMenu((prevActiveMenu) => !prevActiveMenu)}
-        color="blue"
+        color={currentColor}
         icon={<AiOutlineMenu />}
       />
       <div className="flex items-center">
         <NavbarButton
           title="Cart"
           customFunc={() => handleClick("cart")}
-          color="blue"
+          color={currentColor}
           icon={<FiShoppingCart />}
         />
         <NavbarButton
           title="Chat"
           customFunc={() => handleClick("chat")}
-          color="blue"
+          color={currentColor}
           dotColor="#03C9D7"
           icon={<BsChatLeft />}
         />
         <NavbarButton
           title="Notification"
           customFunc={() => handleClick("notification")}
-          color="blue"
+          color={currentColor}
           dotColor="#03C9D7"
           icon={<RiNotification3Line />}
         />
         <TooltipComponent content="Profile">
           <div
-            className="flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg"
+            className="dark:hover:bg-gray-700 flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg"
             onClick={() => handleClick("userProfile")}
           >
             <img src={avatar} className="rounded-full w-8 h-8" />

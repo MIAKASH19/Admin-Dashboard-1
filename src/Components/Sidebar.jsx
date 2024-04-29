@@ -7,7 +7,7 @@ import { links } from "../data/dummy";
 import { useStateContext } from "../Contexts/ContextProvider";
 
 const Sidebar = () => {
-  const { activeMenu, setActiveMenu, screenSize } = useStateContext();
+  const { activeMenu, setActiveMenu, screenSize, currentColor } = useStateContext();
 
   const handleCloseSideBar =()=> {
     if (activeMenu && screenSize <=900 ) {
@@ -16,9 +16,9 @@ const Sidebar = () => {
   }
 
   const activeLink =
-    "flex items-center gap-4 pl-4 pt-3 pb-2.5 rounded-lg text-md m-1";
+    "flex items-center gap-4 pl-4 pt-3 pb-2.5 rounded-lg text-md m-1 text-white";
   const normalLink =
-    "flex items-center gap-4 pl-4 pt-3 pb-2.5 rounded-lg text-md text-gray-800 dark:text-gray-200 dark:hover:text-black hover:bg-light-gray m-1";
+    "flex items-center gap-4 pl-4 pt-3 pb-2.5 rounded-lg text-md text-gray-800 dark:text-gray-200 dark:hover:text-black hover:bg-light-gray dark:hover:bg-gray-700 dark:hover:text-white m-1";
 
   return (
     <div className="ml-5 h-screen md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10">
@@ -36,7 +36,8 @@ const Sidebar = () => {
             <TooltipComponent content="Menu">
               <button
                 type="button"
-                className="text-xl rounded-full p-3 hover:bg-light-gray mt-1 md:hidde block "
+                style={{color: currentColor}}
+                className="text-xl dark:hover:bg-gray-700 rounded-full p-3 hover:bg-light-gray mt-1 md:hidde block "
                 onClick={() => setActiveMenu((prevActiveMenu)=>(!prevActiveMenu))}
               >
                 <MdOutlineCancel />
@@ -44,14 +45,15 @@ const Sidebar = () => {
             </TooltipComponent>
           </div>
           <div className="mt-5">
-            {links.map((item) => (
-              <div key={item.title}>
+            {links.map((item,index) => (
+              <div key={index}>
                 <p className="text-gray-400 dark:text-gray-400 mt-4 m-3 uppercase">
                   {item.title}
                 </p>
                 {item.links.map((link) => (
                   <NavLink
                     to={`${link.name}`}
+                    style={({isActive})=> ({backgroundColor: isActive ? currentColor : ""})}
                     className={({ isActive }) =>
                       isActive ? activeLink : normalLink
                     }
