@@ -88,6 +88,9 @@ const App = () => {
                 <Route path="/stacked" element={<Stacked />} />
               </Routes>
             </div>
+            <div className="w-full fixed md:static bg-main-bg dark:bg-main-dark-bg footer">
+              <Footer />
+            </div>
           </div>
         </div>
       </BrowserRouter>
